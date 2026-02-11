@@ -1,6 +1,6 @@
-variable "managed_rediss" {
+variable "managed_redises" {
   description = <<EOT
-Map of managed_rediss, attributes below
+Map of managed_redises, attributes below
 Required:
     - location
     - name
@@ -34,18 +34,18 @@ EOT
     name                      = string
     resource_group_name       = string
     sku_name                  = string
-    high_availability_enabled = optional(bool, true)
-    public_network_access     = optional(string, "Enabled")
+    high_availability_enabled = optional(bool)   # Default: true
+    public_network_access     = optional(string) # Default: "Enabled"
     tags                      = optional(map(string))
     customer_managed_key = optional(object({
       key_vault_key_id          = string
       user_assigned_identity_id = string
     }))
     default_database = optional(object({
-      access_keys_authentication_enabled = optional(bool, false)
-      client_protocol                    = optional(string, "Encrypted")
-      clustering_policy                  = optional(string, "OSSCluster")
-      eviction_policy                    = optional(string, "VolatileLRU")
+      access_keys_authentication_enabled = optional(bool)   # Default: false
+      client_protocol                    = optional(string) # Default: "Encrypted"
+      clustering_policy                  = optional(string) # Default: "OSSCluster"
+      eviction_policy                    = optional(string) # Default: "VolatileLRU"
       geo_replication_group_name         = optional(string)
       module = optional(list(object({
         args = optional(string)
@@ -61,7 +61,7 @@ EOT
   }))
   validation {
     condition = alltrue([
-      for k, v in var.managed_rediss : (
+      for k, v in var.managed_redises : (
         v.default_database.module == null || (length(v.default_database.module) <= 4)
       )
     ])

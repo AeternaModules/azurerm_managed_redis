@@ -1,5 +1,5 @@
-output "managed_rediss" {
+output "managed_redises" {
   description = "All managed_redis resources"
-  value       = azurerm_managed_redis.managed_rediss
+  value       = azurerm_managed_redis.managed_redises
 }
 
