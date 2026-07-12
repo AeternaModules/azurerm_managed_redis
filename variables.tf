@@ -62,7 +62,7 @@ EOT
   validation {
     condition = alltrue([
       for k, v in var.managed_redises : (
-        v.default_database.module == null || (length(v.default_database.module) <= 4)
+        v.default_database == null || (v.default_database.module == null || (length(v.default_database.module) <= 4))
       )
     ])
     error_message = "Each module list must contain at most 4 items"
