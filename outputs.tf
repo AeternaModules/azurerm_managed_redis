@@ -1,3 +1,7 @@
+output "managed_redises_id" {
+  description = "Map of id values across all managed_redises, keyed the same as var.managed_redises"
+  value       = { for k, v in azurerm_managed_redis.managed_redises : k => v.id }
+}
 output "managed_redises_customer_managed_key" {
   description = "Map of customer_managed_key values across all managed_redises, keyed the same as var.managed_redises"
   value       = { for k, v in azurerm_managed_redis.managed_redises : k => v.customer_managed_key }
