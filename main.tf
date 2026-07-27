@@ -1,5 +1,5 @@
-resource "azurerm_managed_redis" "managed_redises" {
-  for_each = var.managed_redises
+resource "azurerm_managed_redis" "managed_redis" {
+  for_each = var.managed_redis
 
   location                  = each.value.location
   name                      = each.value.name

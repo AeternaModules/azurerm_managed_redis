@@ -1,6 +1,6 @@
-variable "managed_redises" {
+variable "managed_redis" {
   description = <<EOT
-Map of managed_redises, attributes below
+Map of managed_redis, attributes below
 Required:
     - location
     - name
@@ -61,7 +61,7 @@ EOT
   }))
   validation {
     condition = alltrue([
-      for k, v in var.managed_redises : (
+      for k, v in var.managed_redis : (
         v.default_database == null || (v.default_database.module == null || (length(v.default_database.module) <= 4))
       )
     ])
