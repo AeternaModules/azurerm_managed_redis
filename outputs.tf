@@ -4,11 +4,11 @@ output "managed_redis_id" {
 }
 output "managed_redis_customer_managed_key" {
   description = "Map of customer_managed_key values across all managed_redis, keyed the same as var.managed_redis"
-  value       = { for k, v in azurerm_managed_redis.managed_redis : k => v.customer_managed_key if v.customer_managed_key != null && length(v.customer_managed_key) > 0 }
+  value       = { for k, v in azurerm_managed_redis.managed_redis : k => one(v.customer_managed_key) if v.customer_managed_key != null && length(v.customer_managed_key) > 0 }
 }
 output "managed_redis_default_database" {
   description = "Map of default_database values across all managed_redis, keyed the same as var.managed_redis"
-  value       = { for k, v in azurerm_managed_redis.managed_redis : k => v.default_database if v.default_database != null && length(v.default_database) > 0 }
+  value       = { for k, v in azurerm_managed_redis.managed_redis : k => one(v.default_database) if v.default_database != null && length(v.default_database) > 0 }
   sensitive   = true
 }
 output "managed_redis_high_availability_enabled" {
@@ -21,7 +21,7 @@ output "managed_redis_hostname" {
 }
 output "managed_redis_identity" {
   description = "Map of identity values across all managed_redis, keyed the same as var.managed_redis"
-  value       = { for k, v in azurerm_managed_redis.managed_redis : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_managed_redis.managed_redis : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "managed_redis_location" {
   description = "Map of location values across all managed_redis, keyed the same as var.managed_redis"
